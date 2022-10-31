@@ -1,0 +1,49 @@
+{
+  "import_configs": [
+    {
+      "type": "import",
+      "file": "internal/spexclient/spexclient.go",
+      "code": "import \"git.garena.com/shopee/seller-server/seller-marketing/marketing-common/mock\""
+    },
+    {
+      "type": "import",
+      "file": "internal/decorator/http/http.go",
+      "code": "import \"git.garena.com/shopee/seller-server/seller-marketing/marketing-common/mock\""
+    },
+    {
+      "type": "import",
+      "file": "internal/platform/cache/unified_cache_client.go",
+      "code": "import \"git.garena.com/shopee/seller-server/seller-marketing/marketing-common/mock\""
+    }
+  ],
+  "function_configs": [
+    {
+      "type": "function",
+      "file": "internal/spexclient/spexclient.go",
+      "relative_line": 0,
+      "func": "RPCRequest",
+      "code": "if code, isIgnoreMock := mock.MockerForward(ctx, command, request, response); !isIgnoreMock { return code };defer func() { _ = mock.RecorderForward(ctx, command, request, response) }()"
+    },
+    {
+      "type": "function",
+      "file": "internal/decorator/http/http.go",
+      "relative_line": 0,
+      "func": "GetJSON",
+      "code": "if code, isIgnoreMock := mock.MockerForward(ctx, url, params, respData); !isIgnoreMock { return mock.ErrorTranslate(code)};defer func() { _ = mock.RecorderForward(ctx, url, params, respData) }()"
+    },
+    {
+      "type": "function",
+      "file": "internal/decorator/http/http.go",
+      "relative_line": 0,
+      "func": "PostJSON",
+      "code": "if code, isIgnoreMock := mock.MockerForward(ctx, url, data, respData); !isIgnoreMock { return mock.ErrorTranslate(code) };defer func() { _ = mock.RecorderForward(ctx, url, data, respData) }()"
+    },
+    {
+      "type": "function",
+      "file": "internal/platform/cache/unified_cache_client.go",
+      "relative_line": 0,
+      "func": "GetWithContext",
+      "code": "if code, isIgnoreMock := mock.MockerForward(ctx, key, \"\", value); !isIgnoreMock { return mock.ErrorTranslate(code)}"
+    }
+  ]
+}
